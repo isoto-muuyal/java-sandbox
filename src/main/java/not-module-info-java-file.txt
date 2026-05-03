@@ -1,0 +1,23 @@
+module mytest {
+    requires com.fasterxml.jackson.databind;
+
+    exports com.iss.learn.records;
+    exports com.iss.learn.myobjects;
+    exports com.iss.learn;
+
+    requires org.json;
+    requires spring.web;
+    requires org.seleniumhq.selenium.chrome_driver;
+    requires org.seleniumhq.selenium.os;
+    requires org.seleniumhq.selenium.support;
+    requires org.seleniumhq.selenium.api;
+    requires org.seleniumhq.selenium.http;
+    requires org.seleniumhq.selenium.manager;
+    requires org.seleniumhq.selenium.json;
+    requires org.seleniumhq.selenium.java;
+    requires testng;
+
+    opens com.iss.learn.records;
+    exports com.iss.learn.annotationExercise;
+}
+

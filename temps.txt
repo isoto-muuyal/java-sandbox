@@ -1,0 +1,7 @@
+ciudad, grados
+chihuahua, 35
+jersey city, 18
+nyc, 22
+miami, 30
+cdmx, 20
+ciudad juarez, 40
