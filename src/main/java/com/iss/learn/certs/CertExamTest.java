@@ -18,9 +18,6 @@ public class CertExamTest {
         String var2 = "var2", var3 = "var3";
 
         switch (var2) {
-            default:
-                System.out.println("default");
-                break;
             case "var3":
                 System.out.println("var3");
                 break;
@@ -30,13 +27,16 @@ public class CertExamTest {
             case var1:
                 System.out.println("var1");
                 break;
+            default:
+                System.out.println("default");
+                break;
         }
 
         var strB = new StringBuilder("Ronaldo");
-        String str = new String("Cristiano");
+        String str = "Cristiano";
         String res = strB.substring(str.indexOf('r'), str.lastIndexOf("ano")) + str.stripLeading().length()
                 + strB.charAt(5);
-        System.out.println("--- " + strB.substring(0, 1));
+        System.out.println("--- " + strB.charAt(0));
         System.out.println(res);
 
 

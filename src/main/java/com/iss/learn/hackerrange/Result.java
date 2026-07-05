@@ -72,7 +72,7 @@ public class Result {
     }
 
     private static boolean isInPlace(int index, int value) {
-        return index + 1 == value ? true : false;
+        return index + 1 == value;
     }
 
     private static int lastSorted(int[] arr) {
@@ -88,9 +88,9 @@ public class Result {
     }
 
     private static void test() {
-        System.out.println((new String()).length());
+        System.out.println(("").length());
         final int b;
-        int arr[][] = new int[2][]; // Line 1
+        int[][] arr = new int[2][]; // Line 1
 
         int i='A';
         double d=2e2;

@@ -39,13 +39,11 @@ public class EnumsTest {
         System.out.println(name + department);
 
         String strOne = "Jonny";
-        String strTwo = new String("Jonny");
+        String strTwo = "Jonny";
         System.out.print(strOne.equals(strTwo));
         System.out.println(strOne == strTwo);
 
-        StringBuilder sb = new StringBuilder("hello");
-        sb.append(" there");
-        System.out.println(sb);
+        System.out.println("hello" + " there");
 
         EnumsTest enumsTest = new EnumsTest();
         enumsTest.getName("sam", "roy");
@@ -53,19 +51,18 @@ public class EnumsTest {
 
     public void getName(String fname, String lname) {
         String name = fname.concat(lname);
-        StringBuilder sb = new StringBuilder(fname);
         //sb.append(" ");
-        name = sb.toString();// Line 1
+        name = fname;// Line 1
         System.out.println(name);
 
         String s1 = """
-		            \""
+		            ""
 		            """;
         String textBlock = """
                 d-----
                 sdf!!!!!""";
         String s2 = """
-		            \"
+		            "
 		            """;
 
         String s3 = """

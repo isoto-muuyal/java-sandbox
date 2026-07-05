@@ -79,7 +79,6 @@ public class LambdasLearning {
 
         Stream<String> ids = Stream.of("g54", "e456", "df133");
         Stream<String> ids2 = Stream.of("f55", "q123", "p4433");
-        ;
         ids.peek(s -> {
                     s = s.toUpperCase();
                     System.out.println("peeking at all: " + s);
@@ -101,7 +100,6 @@ public class LambdasLearning {
         System.out.println("---------- Comparator example ----------");
         Stream<String> ids3 = Stream.of("q9999", "7777", "g54", "e456", "df133");
         Stream<String> ids4 = Stream.of("99999999l", "h876i", "f55", "1", "q123", "p4433", "o0", "99");
-        ;
 
         System.out.println("-------- sorting by string length ------");
         ids3.sorted(Comparator.comparingInt(String::length))

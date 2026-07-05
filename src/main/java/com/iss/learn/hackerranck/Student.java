@@ -2,9 +2,9 @@ package com.iss.learn.hackerranck;
 
 public class Student {
 
-    private int id;
-    private String name;
-    private Double cgpa;
+    private final int id;
+    private final String name;
+    private final Double cgpa;
 
     public Student(int id, String name, Double cgpa) {
         this.id = id;

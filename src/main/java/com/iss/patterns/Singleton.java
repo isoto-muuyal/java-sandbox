@@ -2,8 +2,8 @@ package com.iss.patterns;
 
 public class Singleton {
 
-    private Integer id;
-    private String name;
+    private final Integer id;
+    private final String name;
     private static Singleton instance;
 
     private Singleton() {

@@ -2,14 +2,14 @@ package com.iss.learn.records;
 
 public interface Citizen {
 
-    static String country = "not defined";
-    static String passport = "na";
+    String country = "not defined";
+    String passport = "na";
 
-    public String getCountry();
+    String getCountry();
 
-    public void setCountry(String country) ;
+    void setCountry(String country) ;
 
-    public String getPassport();
+    String getPassport();
 
-    public void setPassport(String passport);
+    void setPassport(String passport);
 }

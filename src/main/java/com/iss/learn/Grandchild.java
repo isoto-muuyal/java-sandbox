@@ -105,7 +105,7 @@ public class Grandchild extends Child {
         System.out.println(x);
         System.out.println(~x);
 
-        String s1 = new String("hola");
+        String s1 = "hola";
         String s2;
         s2 = grandchild.returnsS();
         System.out.println("------------");
@@ -117,7 +117,7 @@ public class Grandchild extends Child {
                 if ( i == 2)
                     break externalLabel;
                 if( n == 2)
-                    break internal;
+                    break;
             }
             System.out.println("inside external " + i);
 

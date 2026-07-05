@@ -30,7 +30,7 @@ public class InterfacesTest implements IntA, IntB {
         System.out.println(MyEnum.AD);
         System.out.println(MyEnum.AD.getBook());
 
-        Function<String, String> myfirstFunc = st -> st.substring(0,st.length());
+        Function<String, String> myfirstFunc = st -> st;
         myfirstFunc = myfirstFunc.andThen(String::toUpperCase);
         myfirstFunc = myfirstFunc.compose(s -> "other string"  + s);
         Function<String, String> i = Function.identity();

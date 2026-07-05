@@ -4,6 +4,6 @@ public enum InteractionStatus {
 
     OPEN,
     CLOSE,
-    CONFLICT;
+    CONFLICT
 
 }

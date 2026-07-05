@@ -1,18 +1,16 @@
 package com.iss.MyEnums;
 
-public enum OrderStatus {
+public enum OrderPaymentStatus {
 
-    NEW(1, "New"),
-    ON_HOLD(2, "on hold"),
-    IN_PROGRESS(3, "In Progress"),
-    SHIPPED(4, "Shipped"),
-    DELIVERED(5, "Delivered"),
-    CANCELLED(6, "Cancelled");
+    PENDING_PAYMENT(1, "Pending Payment"),
+    PROCESSING_PAYMENT(2, "Processing Payment"),
+    PAYMENT_REJECTED(3, "Payment Rejected"),
+    PAYED(4, "Payed");
 
     private final int code;
     private final String label;
 
-    OrderStatus(int code, String label) {
+    OrderPaymentStatus(int code, String label) {
         this.code = code;
         this.label = label;
     }

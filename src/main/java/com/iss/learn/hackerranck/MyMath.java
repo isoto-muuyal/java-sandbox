@@ -26,10 +26,7 @@ public class MyMath {
                         count++;
                     }
                 }
-                if ( count > 2) {
-                    return false;
-                }
-                return true;
+                return count <= 2;
             }
         };
     }

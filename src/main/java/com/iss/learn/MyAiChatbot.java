@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class MyAiChatbot {
 
-    private static OllamaService ollamaService = new OllamaService();
+    private static final OllamaService ollamaService = new OllamaService();
 
     private static String saludo(){
         return "Hola";
