@@ -10,39 +10,79 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.0</version>
+        <relativePath/>
+    </parent>
+
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <spring-boot.version>3.2.0</spring-boot.version>
+        <java.version>21</java.version>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMdd_HHmmss</maven.build.timestamp.format>
         <aspectj.version>1.9.22</aspectj.version>
     </properties>
 
     <dependencies>
+        <!-- Spring Boot Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-boot.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.json/json -->
+
+        <!-- OSGi Framework API (Fixes BundleActivator NoClassDefFoundError) -->
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>6.0.0</version>
+        </dependency>
+
+        <!-- Reactive Streams (Fixes Publisher NoClassDefFoundError) -->
+        <dependency>
+            <groupId>org.reactivestreams</groupId>
+            <artifactId>reactive-streams</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
+        <!-- JSON -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20250517</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+
+        <!-- Selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.33.0</version>
         </dependency>
+
+        <!-- TestNG (Stable 7.8.0 version that avoids the OSGi SPI loader issue in Surefire) -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.10.2</version>
+            <version>7.8.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JMH Benchmarking -->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>1.37</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>1.37</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <!-- Spring Boot plugin -->
@@ -50,13 +90,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!-- Surefire plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng/*.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/testng/results.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <properties>
                         <property>
@@ -64,8 +105,9 @@
                             <value>true</value>
                         </property>
                     </properties>
-                    <useModulePath>true</useModulePath>
-
+                    <useSystemClassLoader>true</useSystemClassLoader>
+                    <useManifestOnlyJar>false</useManifestOnlyJar>
+                    <useModulePath>false</useModulePath>
                     <systemPropertyVariables>
                         <outputDirectory>${project.basedir}/Reports/${timestamp}_${project.name}_TestReports</outputDirectory>
                     </systemPropertyVariables>
