@@ -33,23 +33,22 @@ public class TransactionServiceImpl implements  TransactionService{
 
         res = allTransactions
                 .stream()
-                .filter( t -> t.getStatus().equals("CLEARED")).collect(Collectors.toList());
-
-        if (res.size() == 0) {
-            throw new NotFoundException("Not found cleared transactions for userId: " + userId);
-        }
+                .filter( t -> "CLEARED".equals(t.getStatus()) ).collect(Collectors.toList());
 
         return res;
     }
 
+
+
     public Double getTotalOfTransactionCleared(String userId) {
-        if (userId == null || userId.isEmpty()) {
-            throw new InvalidUserIdException("User Id: " + userId);
+
+        List<Transaction> transactionsCleared = getClearedTransactions(userId);
+        if (transactionsCleared == null) {
+            return 0.0;
         }
-        List<Transaction> allTransactions = repository.findByCustomerId(userId);
-        return allTransactions
+
+        return transactionsCleared
                 .stream()
-                .filter( t-> t.getStatus().equals("CLEARED"))
                 .mapToDouble(Transaction::getAmount).sum();
     }
 
