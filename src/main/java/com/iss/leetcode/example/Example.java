@@ -1,12 +1,11 @@
 package com.iss.leetcode.example;
 
+import com.iss.MyEnums.OrderPaymentStatus;
 import com.iss.MyEnums.Status;
 import com.iss.pojos.MyObj;
+import com.iss.pojos.Order;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -14,6 +13,13 @@ import java.util.stream.IntStream;
 public class Example {
 
     public static void main(String[] args) {
+
+        intStreamsExcersice();
+
+        String hey = "hola mundo";
+        String[] hey2 = hey.split(" ");
+        System.out.println(hey);
+        System.out.println(Arrays.toString(hey2));
 
         System.out.println("test to identify if the mulfiply of all members of an array is positve negative or zero");
         int[] testValues = {1, 4, 1, 1};
@@ -65,6 +71,58 @@ public class Example {
         System.out.println("------------------------------");
     }
 
+    private static class MyTestObj {
+        private Integer id;
+        private String name;
+
+        static {
+            System.out.println("from static myobj");
+        }
+
+        public MyTestObj(Integer id, String name) {
+            this.id = id;
+            this.name = name;
+            System.out.println("instantiating myobj");
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString(){
+            return "MyObj {" +
+                        "id: " + id + "," +
+                        "name: " + name +
+                    "}";
+        }
+    }
+
+    private static void intStreamsExcersice() {
+        MyTestObj obj1 = new MyTestObj(1, "pepe");
+        MyTestObj obj2 = new MyTestObj(2, "pecas");
+        MyTestObj obj3 = new MyTestObj(3, "la cuca");
+        List<MyTestObj> myObjs = new ArrayList<>(List.of(obj1, obj2, obj3));
+        List<Integer> myList = new ArrayList<>(List.of(1, 5, 4));
+        Optional<Integer> reduced = myList.stream().reduce((a,b) -> a - b);
+        System.out.println(reduced.orElse(0));
+
+        List<MyTestObj> filtered = myObjs.stream().filter( a-> a.name.length() > 3).toList();
+        filtered.forEach(System.out::println);
+    }
+
     public static void testStatus(MyObj obj) {
         obj.setStatus("updated");
         System.out.println("just testing");
@@ -110,7 +168,22 @@ public class Example {
 
     private void testMultithread() {
 
+        //instantiate objects or classes that I will use in parallel
+       MyUtils utils = new MyUtils();
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order(1,  "productName", 2, 2.0, Status.FINISHED));
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            //make some calls to db or otherwise, maybe sending emails
+
+            //we apply some logic or a loop like
+            for (Order order : orders) {
+                if (order.status().equals(Status.FINISHED)) {
+                    executor.submit(() -> {
+                        utils.sendEmail(order.status());
+                    });
+                    executor.submit(utils::sum);
+                }
+            }
 
         } catch (Exception e) {
             System.out.println("something happened: " + e.getMessage());
